@@ -1,0 +1,192 @@
+/* ── Shared ── */
+.bullets { padding-left: 15px; list-style: disc; margin: 4px 0 0; }
+.bullets li { font-size: 11px; color: #333; margin-bottom: 2px; line-height: 1.55; }
+
+.section { margin-bottom: 14px; }
+
+.sectionTitle {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1.5px solid;
+  padding-bottom: 3px;
+  margin-bottom: 8px;
+}
+
+.entry { margin-bottom: 10px; }
+
+.entryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 3px;
+  flex-wrap: wrap;
+}
+
+.entryTitle { font-size: 12px; font-weight: 700; color: #111; }
+.entryCompany { font-size: 11px; font-weight: 600; }
+.entryPeriod { font-size: 10px; color: #888; flex-shrink: 0; font-style: italic; }
+.entryTech { font-size: 10px; font-weight: 600; margin-left: 6px; }
+.bodyText { font-size: 11px; color: #333; line-height: 1.6; margin: 0; }
+
+/* ── SIDEBAR-LEFT ── */
+.sidebarLeft {
+  display: flex;
+  min-height: 900px;
+  font-family: 'Inter', Arial, sans-serif;
+  background: #fff;
+}
+
+.leftCol {
+  width: 210px;
+  flex-shrink: 0;
+  padding: 24px 14px;
+  color: #fff;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.rightCol {
+  flex: 1;
+  padding: 24px 20px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.avatarCircle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 10px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.sidebarName { font-size: 14px; font-weight: 800; margin-bottom: 3px; line-height: 1.2; }
+.sidebarRole { font-size: 10px; margin-bottom: 16px; opacity: 0.85; }
+
+.sidebarSection { margin-bottom: 16px; }
+
+.sidebarSectionTitle {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.65;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 3px;
+  margin-bottom: 7px;
+}
+
+.sidebarItem {
+  font-size: 10px;
+  opacity: 0.85;
+  margin-bottom: 4px;
+  word-break: break-all;
+  line-height: 1.4;
+}
+
+.sidebarSkills { display: flex; flex-wrap: wrap; gap: 4px; }
+.sidebarSkillTag {
+  font-size: 9px;
+  padding: 2px 7px;
+  border-radius: 100px;
+  margin-bottom: 2px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ── TOP-BAND ── */
+.topBand {
+  display: flex;
+  flex-direction: column;
+  min-height: 900px;
+  font-family: 'Inter', Arial, sans-serif;
+  background: #fff;
+}
+
+.bandHeader {
+  padding: 24px 28px 20px;
+  color: #fff;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.bandName { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
+.bandRole { font-size: 12px; opacity: 0.85; margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
+.bandContact { font-size: 10px; opacity: 0.75; }
+
+.bandBody { display: flex; flex: 1; }
+.bandMain { flex: 1; padding: 20px 22px; }
+.bandSide { width: 200px; flex-shrink: 0; padding: 20px 16px; border-left: 1px solid #eee; }
+
+.skillPills { display: flex; flex-wrap: wrap; gap: 4px; }
+.skillPill {
+  font-size: 10px;
+  border: 1px solid;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+
+/* ── SINGLE COLUMN ── */
+.single {
+  padding: 32px 36px;
+  min-height: 900px;
+  font-family: 'Inter', Arial, sans-serif;
+  background: #fff;
+}
+
+.singleHeader { text-align: center; }
+.singleName { font-size: 24px; font-weight: 900; letter-spacing: 0.5px; margin-bottom: 4px; }
+.singleRole { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.singleContact { font-size: 11px; color: #555; margin-bottom: 3px; }
+.singleLinks { font-size: 11px; margin-top: 2px; }
+
+/* ── Professional header (used in sidebar-right) ── */
+.proHeader { border-bottom: 2px solid; padding-bottom: 12px; margin-bottom: 14px; }
+.proName { font-size: 22px; font-weight: 900; color: #111; margin-bottom: 3px; }
+.proRole { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+
+/* ── Profile Photo ── */
+.avatarPhoto {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.35);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.bandHeaderInner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.bandPhoto {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.35);
+  flex-shrink: 0;
+}
+
+.singlePhoto {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 10px;
+  display: block;
+  border: 3px solid currentColor;
+}

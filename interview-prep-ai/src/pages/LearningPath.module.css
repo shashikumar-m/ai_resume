@@ -1,0 +1,96 @@
+
+.page { padding: 32px; max-width: 1000px; margin: 0 auto; }
+
+/* ── Page Header ── */
+.pageHeader { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.pageHeaderIcon { width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #6c63ff, #a89fff); display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
+.pageTitle { font-size: 22px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+.pageSub { font-size: 13px; color: var(--text-muted); }
+
+/* ── Config Card ── */
+.configCard { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px; margin-bottom: 20px; }
+.configTitle { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 18px; }
+.configGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 700px) { .configGrid { grid-template-columns: 1fr; } }
+.configField { display: flex; flex-direction: column; gap: 7px; }
+.configFieldFull { grid-column: 1 / -1; }
+.configLabel { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); }
+.configSelect, .configInput { background: var(--bg3); border: 1px solid var(--border); border-radius: 9px; padding: 10px 13px; color: var(--text); font-size: 13px; font-family: inherit; transition: border-color 0.15s; width: 100%; }
+.configSelect:focus, .configInput:focus { outline: none; border-color: var(--primary); }
+.chipRow { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { padding: 6px 12px; border-radius: 7px; background: var(--bg3); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+.chip:hover { border-color: var(--primary); color: var(--primary-light); }
+.chipActive { background: rgba(108,99,255,0.15); border-color: var(--primary); color: var(--primary-light); font-weight: 600; }
+
+/* ── Tabs ── */
+.tabs { display: flex; gap: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 4px; width: fit-content; margin-bottom: 20px; }
+.tab { display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 7px; background: none; border: none; color: var(--text-muted); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+.tab:hover { color: var(--text); }
+.tabActive { background: var(--bg3); color: var(--text); font-weight: 700; }
+
+/* ── Tab Content ── */
+.tabContent {}
+.tabHeader { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 12px; }
+.tabTitle { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+.tabDesc { font-size: 13px; color: var(--text-muted); }
+.tabActions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+/* Buttons */
+.generateBtn { display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #6c63ff, #8b85ff); color: #fff; border: none; border-radius: 9px; padding: 10px 20px; font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity 0.15s, transform 0.1s; font-family: inherit; }
+.generateBtn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+.generateBtn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.saveBtn { display: flex; align-items: center; gap: 7px; background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.3); color: var(--primary-light); padding: 10px 18px; border-radius: 9px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+.saveBtn:hover:not(:disabled) { background: rgba(108,99,255,0.2); }
+.saveBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+.saveBtnSaved { background: rgba(34,197,94,0.1) !important; border-color: rgba(34,197,94,0.3) !important; color: #22c55e !important; }
+
+.backBtn { display: flex; align-items: center; gap: 6px; background: var(--bg2); border: 1px solid var(--border); color: var(--text-muted); padding: 9px 16px; border-radius: 9px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+.backBtn:hover { border-color: var(--primary); color: var(--primary-light); }
+
+.refreshSmallBtn { width: 34px; height: 34px; border-radius: 8px; background: var(--bg2); border: 1px solid var(--border); color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.refreshSmallBtn:hover { border-color: var(--primary); color: var(--primary-light); }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin { animation: spin 0.8s linear infinite; }
+
+/* ── Empty State ── */
+.emptyState { background: var(--bg2); border: 2px dashed var(--border); border-radius: 14px; padding: 56px 40px; text-align: center; color: var(--text-muted); }
+.emptyIcon { color: var(--text-dim); margin-bottom: 16px; }
+.emptyState h3 { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.emptyState p { font-size: 14px; max-width: 440px; margin: 0 auto 20px; line-height: 1.6; }
+.emptyFeatures { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.emptyFeatures span { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--primary-light); background: rgba(108,99,255,0.08); border: 1px solid rgba(108,99,255,0.2); padding: 4px 10px; border-radius: 100px; }
+
+/* ── Content Card ── */
+.contentCard { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; }
+
+/* ── AI Content Rendering ── */
+.aiContent { font-size: 14px; line-height: 1.75; color: var(--text-muted); }
+.h2 { font-size: 18px; font-weight: 800; color: var(--text); margin: 22px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.h2:first-child { margin-top: 0; }
+.h3 { font-size: 15px; font-weight: 700; color: var(--primary-light); margin: 16px 0 8px; }
+.bold { font-weight: 700; color: var(--text); margin: 6px 0; }
+.p { margin: 4px 0; color: var(--text-muted); }
+.li { margin: 4px 0 4px 20px; list-style: disc; color: var(--text-muted); }
+.liNum { margin: 4px 0 4px 20px; list-style: decimal; color: var(--text-muted); }
+.hr { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+.spacer { height: 6px; }
+@keyframes blink { 50% { opacity: 0; } }
+.cursor { display: inline-block; width: 8px; height: 14px; background: var(--primary-light); margin-left: 2px; vertical-align: middle; animation: blink 0.8s step-end infinite; }
+
+/* ── Saved Plans ── */
+.savedList { display: flex; flex-direction: column; gap: 10px; }
+.savedCard { display: flex; align-items: center; justify-content: space-between; gap: 14px; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; transition: border-color 0.15s; }
+.savedCard:hover { border-color: rgba(108,99,255,0.3); }
+.savedCardLeft { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+.savedCardIcon { width: 38px; height: 38px; border-radius: 10px; background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.2); display: flex; align-items: center; justify-content: center; color: var(--primary-light); flex-shrink: 0; }
+.savedCardTitle { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.savedCardMeta { font-size: 12px; color: var(--text-muted); }
+.savedCardDate { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+.savedCardActions { display: flex; gap: 8px; flex-shrink: 0; }
+.savedViewBtn { display: flex; align-items: center; gap: 5px; background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.25); color: var(--primary-light); padding: 7px 14px; border-radius: 7px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+.savedViewBtn:hover { background: rgba(108,99,255,0.2); }
+.savedDeleteBtn { width: 32px; height: 32px; border-radius: 7px; background: none; border: 1px solid var(--border); color: var(--text-dim); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.savedDeleteBtn:hover { border-color: var(--error); color: var(--error); }
+.savedLoading { display: flex; align-items: center; gap: 10px; padding: 40px; justify-content: center; color: var(--primary-light); font-size: 14px; }

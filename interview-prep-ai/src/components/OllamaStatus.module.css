@@ -1,0 +1,30 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 100px;
+  border: 1px solid;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.checking { color: var(--text-muted); border-color: var(--border); }
+.checking .dot { background: var(--text-muted); }
+
+.online { color: var(--success); border-color: rgba(34,197,94,0.3); background: rgba(34,197,94,0.08); }
+.online .dot { background: var(--success); animation: pulse 1.5s ease-in-out infinite; }
+
+.offline { color: var(--error); border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.08); }
+.offline .dot { background: var(--error); }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

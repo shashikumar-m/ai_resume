@@ -1,0 +1,41 @@
+.page { padding: 32px; max-width: 1000px; margin: 0 auto; }
+.header { margin-bottom: 28px; }
+.title { font-size: 26px; font-weight: 800; margin-bottom: 4px; }
+.sub { font-size: 14px; color: var(--text-muted); }
+
+.empty { background: var(--bg2); border: 2px dashed var(--border); border-radius: var(--radius); padding: 60px; text-align: center; color: var(--text-muted); }
+.emptyIcon { color: var(--text-dim); margin-bottom: 16px; }
+.empty h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+
+.kpiGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; margin-bottom: 20px; }
+
+.kpiCard { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.kpiIcon { width: 40px; height: 40px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.kpiNum { font-size: 28px; font-weight: 900; margin-bottom: 4px; }
+.kpiLabel { font-size: 12px; color: var(--text-muted); }
+
+.statusGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+@media (max-width: 600px) { .statusGrid { grid-template-columns: 1fr; } }
+
+.statusCard { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.statusLabel { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 8px; }
+.statusValue { font-size: 22px; font-weight: 800; margin-bottom: 12px; }
+.statusBar { height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
+.statusFill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+.statusNote { font-size: 13px; color: var(--text-muted); }
+
+.historyCard { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; }
+.historyTitle { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 20px; }
+
+.historyChart { display: flex; align-items: flex-end; gap: 12px; height: 120px; overflow-x: auto; padding-bottom: 4px; }
+
+.barGroup { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 48px; }
+.barWrap { height: 80px; display: flex; align-items: flex-end; width: 32px; }
+.bar { width: 100%; border-radius: 4px 4px 0 0; transition: height 0.4s ease; min-height: 4px; }
+.barScore { font-size: 12px; font-weight: 700; }
+.barDate { font-size: 10px; color: var(--text-dim); white-space: nowrap; }
+
+.tipsCard { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+.tipsTitle { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 16px; }
+.tipsList { display: flex; flex-direction: column; gap: 10px; }
+.tip { font-size: 14px; color: var(--text-muted); padding: 10px 14px; background: var(--bg3); border-radius: var(--radius-sm); border-left: 3px solid var(--primary); }
