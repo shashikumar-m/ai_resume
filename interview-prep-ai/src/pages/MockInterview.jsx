@@ -122,6 +122,8 @@ export default function MockInterview() {
   const [scores, setScores] = useState([])
   const [loadingQuestions, setLoadingQuestions] = useState(false)
   const [voiceSupported, setVoiceSupported] = useState(false)
+  const [overallFeedback, setOverallFeedback] = useState('')
+  const [feedbackLoading, setFeedbackLoading] = useState(false)
 
   const recognitionRef = useRef(null)
   const chatEndRef = useRef(null)
@@ -335,12 +337,11 @@ Keep your response under 100 words. Be encouraging but honest. Sound natural, no
     const closing = `That concludes our interview! You've answered all ${questions.length} questions. I'll now prepare your performance report. Thank you for your time!`
     addMessage('ai', closing)
     if (!muteAI) speak(closing, () => setIsSpeaking(false))
-    setTimeout(() => {
+    setTimeout(async () => {
       const avg = scores.length
         ? Math.round(scores.reduce((a, s) => a + (s.score || 6), 0) / scores.length)
         : 6
       addMockSession({ role, score: avg, date: new Date().toLocaleDateString() })
-      // Auto-save to history
       save('mock',
         `Mock Interview — ${role}`,
         `${expLevel} · ${scores.length} questions · Avg ${avg}/10`,
@@ -348,7 +349,50 @@ Keep your response under 100 words. Be encouraging but honest. Sound natural, no
         { role, expLevel, avgScore: avg, scores, totalQuestions: scores.length }
       )
       setPhase('results')
+      // Generate overall AI feedback
+      generateOverallFeedback(scores, avg)
     }, 2000)
+  }
+
+  const generateOverallFeedback = async (allScores, avg) => {
+    setFeedbackLoading(true)
+    const prompt = `You are an expert interview coach. Based on this mock interview performance, provide a comprehensive feedback report.
+
+Role: ${role}
+Experience Level: ${expLevel}
+Overall Score: ${avg}/10
+
+Interview Q&A Summary:
+${allScores.map((s, i) => `Q${i+1}: ${s.q}\nAnswer: ${s.answer}\nScore: ${s.score}/10\nFeedback: ${s.feedback}`).join('\n\n')}
+
+Provide a structured overall feedback report with these sections:
+
+## 🎯 Overall Performance Summary
+[2-3 sentences summarizing the candidate's overall performance]
+
+## ✅ Key Strengths
+[3-4 specific strengths demonstrated across the interview]
+
+## ⚠️ Areas for Improvement
+[3-4 specific areas that need work, with actionable advice]
+
+## 📊 Skill Assessment
+[Rate these areas: Communication, Technical Knowledge, Problem Solving, Confidence — each with a brief comment]
+
+## 🚀 Action Plan
+[3-5 specific steps the candidate should take before their next interview]
+
+## 💬 Final Verdict
+[One encouraging closing statement with readiness assessment]
+
+Be specific, constructive, and encouraging. Reference actual answers from the interview.`
+
+    try {
+      await groqChat(prompt, (_, full) => setOverallFeedback(full))
+    } catch (e) {
+      setOverallFeedback(`Could not generate feedback: ${e.message}`)
+    }
+    setFeedbackLoading(false)
   }
 
   const handleReset = () => {
@@ -360,6 +404,7 @@ Keep your response under 100 words. Be encouraging but honest. Sound natural, no
     setCurrentQ(0)
     setTextAnswer('')
     setTranscript('')
+    setOverallFeedback('')
   }
 
   const avgScore = scores.length
@@ -588,21 +633,29 @@ Keep your response under 100 words. Be encouraging but honest. Sound natural, no
             </p>
           </div>
 
-          {/* Per-question breakdown */}
-          <div className={styles.breakdown}>
-            <div className={styles.breakdownTitle}>Question-by-Question Breakdown</div>
-            {scores.map((s, i) => (
-              <div key={i} className={styles.breakdownItem}>
-                <div className={styles.breakdownHeader}>
-                  <span className={styles.breakdownQ}>Q{i + 1}: {s.q}</span>
-                  <span className={styles.breakdownScore} style={{
-                    color: s.score >= 7 ? '#22c55e' : s.score >= 5 ? '#f59e0b' : '#ef4444'
-                  }}>{s.score}/10</span>
-                </div>
-                <div className={styles.breakdownAnswer}><strong>Your answer:</strong> {s.answer}</div>
-                <div className={styles.breakdownFeedback}>{s.feedback}</div>
+          {/* ── AI Overall Feedback ── */}
+          <div className={styles.overallFeedbackCard}>
+            <div className={styles.overallFeedbackHeader}>
+              <Sparkles size={16} className={styles.overallFeedbackIcon} />
+              <span>AI Performance Feedback</span>
+              {feedbackLoading && <RefreshCw size={13} className={styles.spin} />}
+            </div>
+            {feedbackLoading && !overallFeedback && (
+              <div className={styles.feedbackLoading}>
+                <RefreshCw size={16} className={styles.spin} />
+                <span>Groq AI is analyzing your interview performance...</span>
               </div>
-            ))}
+            )}
+            {overallFeedback && (
+              <div className={styles.overallFeedbackContent}>
+                {overallFeedback.split('\n').map((line, i) => {
+                  if (line.startsWith('## ')) return <h3 key={i} className={styles.fbH3}>{line.slice(3)}</h3>
+                  if (line.startsWith('- ') || line.startsWith('• ')) return <li key={i} className={styles.fbLi}>{line.slice(2)}</li>
+                  if (line.trim() === '') return <div key={i} style={{ height: 6 }} />
+                  return <p key={i} className={styles.fbP}>{line}</p>
+                })}
+              </div>
+            )}
           </div>
 
           {/* Summary stats */}
@@ -625,6 +678,23 @@ Keep your response under 100 words. Be encouraging but honest. Sound natural, no
               </div>
               <div className={styles.statLabel}>Needs Work</div>
             </div>
+          </div>
+
+          {/* Per-question breakdown */}
+          <div className={styles.breakdown}>
+            <div className={styles.breakdownTitle}>Question-by-Question Breakdown</div>
+            {scores.map((s, i) => (
+              <div key={i} className={styles.breakdownItem}>
+                <div className={styles.breakdownHeader}>
+                  <span className={styles.breakdownQ}>Q{i + 1}: {s.q}</span>
+                  <span className={styles.breakdownScore} style={{
+                    color: s.score >= 7 ? '#22c55e' : s.score >= 5 ? '#f59e0b' : '#ef4444'
+                  }}>{s.score}/10</span>
+                </div>
+                <div className={styles.breakdownAnswer}><strong>Your answer:</strong> {s.answer}</div>
+                <div className={styles.breakdownFeedback}>{s.feedback}</div>
+              </div>
+            ))}
           </div>
 
           <div className={styles.resultsBtns}>

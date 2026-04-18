@@ -1,5 +1,5 @@
 ﻿import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Brain, FileText, MessageSquare, BookOpen, BarChart2, Zap, LayoutDashboard, TrendingUp, GraduationCap, Code2, LogOut, History } from 'lucide-react'
+import { Brain, FileText, MessageSquare, BookOpen, BarChart2, Zap, LayoutDashboard, GraduationCap, Code2, LogOut, History } from 'lucide-react'
 import OllamaStatus from './OllamaStatus'
 import { useAuth } from '../context/AuthContext'
 import styles from './Layout.module.css'
@@ -13,7 +13,6 @@ const nav = [
   { to: '/code',       icon: Code2,            label: 'Code & Test' },
   { to: '/learn',      icon: BookOpen,         label: 'Learning Path' },
   { to: '/skills',     icon: BarChart2,        label: 'Skill Gap' },
-  { to: '/analytics',  icon: TrendingUp,       label: 'Analytics' },
   { to: '/history',    icon: History,          label: 'History' },
 ]
 

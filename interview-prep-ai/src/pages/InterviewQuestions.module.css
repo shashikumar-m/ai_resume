@@ -561,3 +561,94 @@
   padding: 6px 0;
   margin-bottom: 4px;
 }
+
+/* ── Overall Session Feedback ── */
+.overallFeedbackSection {
+  background: rgba(108,99,255,0.05);
+  border: 1px solid rgba(108,99,255,0.2);
+  border-radius: 14px;
+  padding: 22px;
+  margin-top: 20px;
+}
+
+.overallFeedbackHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.overallFeedbackTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary-light);
+  margin-bottom: 4px;
+}
+
+.overallFeedbackSub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.overallFeedbackBtn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: linear-gradient(135deg, #6c63ff, #8b85ff);
+  border: none;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  font-family: inherit;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.overallFeedbackBtn:hover:not(:disabled) { opacity: 0.9; }
+.overallFeedbackBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.overallFeedbackLoading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 12px 0;
+}
+
+.overallFeedbackContent { }
+
+.fbH3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 14px 0 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.fbH3:first-child { margin-top: 0; }
+
+.fbLi {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 4px 0 4px 18px;
+  list-style: disc;
+  line-height: 1.6;
+}
+
+.fbP {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 3px 0;
+}

@@ -248,12 +248,63 @@ export default function InterviewQuestions() {
   const [loading, setLoading] = useState(false)
   const [generated, setGenerated] = useState(false)
   const [useAI, setUseAI] = useState(false)
-  const [sessionAnswers, setSessionAnswers] = useState({}) // { questionIndex: { answer, score, feedback } }
+  const [sessionAnswers, setSessionAnswers] = useState({})
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [overallFeedback, setOverallFeedback] = useState('')
+  const [overallLoading, setOverallLoading] = useState(false)
 
   const recordAnswer = (idx, answer, score, feedback) => {
     setSessionAnswers(prev => ({ ...prev, [idx]: { question: questions[idx]?.q || '', answer, score, feedback } }))
+  }
+
+  const handleGetOverallFeedback = async () => {
+    const answers = Object.values(sessionAnswers)
+    if (answers.length === 0) return
+    setOverallLoading(true)
+    setOverallFeedback('')
+    const avgScore = answers.filter(a => a.score).length > 0
+      ? Math.round(answers.filter(a => a.score).reduce((s, a) => s + a.score, 0) / answers.filter(a => a.score).length)
+      : null
+
+    const prompt = `You are an expert interview coach. Analyze this Q&A practice session and provide comprehensive feedback.
+
+Role: ${role}
+Experience Level: ${expLabel}
+Question Type: ${typeLabel}
+Average Score: ${avgScore ? `${avgScore}/10` : 'Not scored yet'}
+
+Answered Questions:
+${answers.map((a, i) => `Q${i+1}: ${a.question}\nAnswer: ${a.answer}\nScore: ${a.score ? `${a.score}/10` : 'Not scored'}\nFeedback: ${a.feedback || 'No feedback yet'}`).join('\n\n')}
+
+Provide a structured feedback report:
+
+## 📊 Session Summary
+[Overall assessment of the practice session in 2-3 sentences]
+
+## ✅ What You Did Well
+[3-4 specific strengths from the answers given]
+
+## ⚠️ Key Areas to Improve
+[3-4 specific weaknesses with actionable advice]
+
+## 💡 Answer Quality Analysis
+[Comment on answer structure, depth, use of examples, STAR method usage]
+
+## 🎯 Topics to Study More
+[Based on weak answers, list 3-5 specific topics to review]
+
+## 🚀 Next Steps
+[3 concrete actions to improve before the actual interview]
+
+Be specific and reference actual answers. Keep it constructive and encouraging.`
+
+    try {
+      await groqChat(prompt, (_, full) => setOverallFeedback(full))
+    } catch (e) {
+      setOverallFeedback(`Error: ${e.message}`)
+    }
+    setOverallLoading(false)
   }
 
   const handleSaveSession = async () => {
@@ -500,9 +551,51 @@ Continue for all ${qCount} questions. Make questions specific to ${role} at ${ex
           </div>
         )}
 
+        {/* ── Overall AI Feedback ── */}
+        {generated && Object.keys(sessionAnswers).length > 0 && (
+          <div className={styles.overallFeedbackSection}>
+            <div className={styles.overallFeedbackHeader}>
+              <div>
+                <div className={styles.overallFeedbackTitle}>
+                  <Sparkles size={16} /> Overall Session Feedback
+                </div>
+                <div className={styles.overallFeedbackSub}>
+                  Get AI analysis of your entire practice session
+                </div>
+              </div>
+              <button
+                className={styles.overallFeedbackBtn}
+                onClick={handleGetOverallFeedback}
+                disabled={overallLoading}
+              >
+                {overallLoading
+                  ? <><RefreshCw size={13} className={styles.spin} /> Analyzing...</>
+                  : <><Sparkles size={13} /> Get Overall Feedback</>}
+              </button>
+            </div>
+
+            {overallLoading && !overallFeedback && (
+              <div className={styles.overallFeedbackLoading}>
+                <RefreshCw size={16} className={styles.spin} />
+                <span>Groq AI is analyzing your session performance...</span>
+              </div>
+            )}
+
+            {overallFeedback && (
+              <div className={styles.overallFeedbackContent}>
+                {overallFeedback.split('\n').map((line, i) => {
+                  if (line.startsWith('## ')) return <h3 key={i} className={styles.fbH3}>{line.slice(3)}</h3>
+                  if (line.startsWith('- ') || line.startsWith('• ')) return <li key={i} className={styles.fbLi}>{line.slice(2)}</li>
+                  if (line.trim() === '') return <div key={i} style={{ height: 6 }} />
+                  return <p key={i} className={styles.fbP}>{line}</p>
+                })}
+              </div>
+            )}
+          </div>
+        )}
+
         {/* ── Empty state ── */}
-        {!generated && (
-          <div className={styles.emptyState}>
+        {!generated && (          <div className={styles.emptyState}>
             <MessageSquare size={40} className={styles.emptyIcon} />
             <h3>Ready to practice?</h3>
             <p>Select your target role, experience level, and question type above, then click Generate Questions to get started.</p>

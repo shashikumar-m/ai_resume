@@ -156,3 +156,61 @@
 
 .saveHistoryBtn:hover:not(:disabled) { opacity: 0.9; }
 .saveHistoryBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Overall AI Feedback Card ── */
+.overallFeedbackCard {
+  background: rgba(108,99,255,0.05);
+  border: 1px solid rgba(108,99,255,0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 22px;
+}
+
+.overallFeedbackHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-light);
+  margin-bottom: 14px;
+}
+
+.overallFeedbackIcon { flex-shrink: 0; }
+
+.feedbackLoading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 12px 0;
+}
+
+.overallFeedbackContent { }
+
+.fbH3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 14px 0 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.fbH3:first-child { margin-top: 0; }
+
+.fbLi {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 4px 0 4px 18px;
+  list-style: disc;
+  line-height: 1.6;
+}
+
+.fbP {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 3px 0;
+}

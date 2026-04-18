@@ -11,10 +11,8 @@ import InterviewQuestions from './pages/InterviewQuestions'
 import MockInterview from './pages/MockInterview'
 import LearningPath from './pages/LearningPath'
 import SkillGap from './pages/SkillGap'
-import Analytics from './pages/Analytics'
 import StudyConcepts from './pages/StudyConcepts'
 import CodePractice from './pages/CodePractice'
-
 import History from './pages/History'
 
 const P = ({ children }) => <ProtectedRoute>{children}</ProtectedRoute>
@@ -34,7 +32,6 @@ export default function App() {
           <Route path="/code"       element={<P><CodePractice /></P>} />
           <Route path="/learn"      element={<P><LearningPath /></P>} />
           <Route path="/skills"     element={<P><SkillGap /></P>} />
-          <Route path="/analytics"  element={<P><Analytics /></P>} />
           <Route path="/history"    element={<P><History /></P>} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
